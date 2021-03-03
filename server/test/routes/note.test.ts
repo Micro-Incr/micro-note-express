@@ -20,7 +20,7 @@ describe('Test notes route', () => {
     let note: INote | null;
     beforeEach(async () => {
         try {
-            await Note.create(mockNote);
+            await (new Note(mockNote)).save();
             note = await Note.findOne({title: mockNote.title});
         } catch (e) {
             console.log(e);
