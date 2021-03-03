@@ -7,12 +7,8 @@ import {connectToDatabase} from './functions/helper';
 const request = supertest(app);
 
 beforeAll(async (done) => {
-    await connectToDatabase();
+    await connectToDatabase(done);
     done();
-});
-
-afterAll((done) => {
-    mongoose.disconnect(done);
 });
 
 it('Gets the invalid endpoint and return a 404 status', async (done) => {
@@ -21,4 +17,8 @@ it('Gets the invalid endpoint and return a 404 status', async (done) => {
     expect(response.body).toMatchObject({ error: 'Nothing here' });
     done();
 
+});
+
+afterAll((done) => {
+    mongoose.disconnect(done);
 });

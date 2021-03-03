@@ -2,8 +2,11 @@ import Note, {INote} from '../../models/Note';
 import supertest from 'supertest';
 import app from '../../app';
 import {connectToDatabase} from '../functions/helper';
+import mongoose from 'mongoose';
 
 const request = supertest(app);
+
+let note: INote | null;
 
 beforeAll(async (done) => {
     await connectToDatabase(done);
@@ -16,7 +19,6 @@ const mockNote = {
 
 describe('Test notes route', () => {
 
-    let note: INote | null;
     beforeEach(async (done) => {
         try {
             await (new Note(mockNote)).save();
@@ -100,8 +102,6 @@ describe('Test notes route', () => {
     });
 });
 
-
-// it('Should delete a note', async () => {
-//     const res = await request.delete(`/api/v1/notes/${1}`)
-//     expect(res.status).toBe(204)
-// })
+afterAll(async () => {
+    await mongoose.disconnect();
+});
