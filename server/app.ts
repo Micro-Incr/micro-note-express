@@ -1,6 +1,18 @@
-import express, {Application} from "express";
 import "dotenv/config";
+import express, {Application} from "express";
+import cors from "cors";
+
+// routes
+import NotesRoute from './routes/Note.route'
 
 const app: Application = express();
+
+// middlewares
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({extended: false}));
+
+// route middleware
+app.use('/api/v1/notes', NotesRoute)
 
 export default app;
