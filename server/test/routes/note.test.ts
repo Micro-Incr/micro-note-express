@@ -6,8 +6,7 @@ import {connectToDatabase} from '../functions/helper';
 const request = supertest(app);
 
 beforeAll(async (done) => {
-    await connectToDatabase();
-    done();
+    await connectToDatabase(done);
 });
 
 const mockNote = {
@@ -18,10 +17,11 @@ const mockNote = {
 describe('Test notes route', () => {
 
     let note: INote | null;
-    beforeEach(async () => {
+    beforeEach(async (done) => {
         try {
             await (new Note(mockNote)).save();
             note = await Note.findOne({title: mockNote.title});
+            done();
         } catch (e) {
             console.log(e);
         }
