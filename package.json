@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "npm run tsc && node ./build/server.js",
+    "start": "node ./build/server.js",
     "test": "jest --detectOpenHandles ",
     "test:watch": "jest --watch",
     "dev": "nodemon ./server/server.ts",
+    "build": "npm run tsc",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
     "prettier": "prettier .",
