@@ -37,6 +37,7 @@ describe('Test notes route', () => {
         it('Should create a note', async (done) => {
             const res = await request.post('/api/v1/notes').send(mockNote);
             expect(res.status).toBe(201);
+            note = await Note.findOne({title: mockNote.title});
             done();
         });
 
